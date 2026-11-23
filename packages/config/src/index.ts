@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const BRAND = { name: 'Solana Gold', ticker: 'GOLD', tagline: 'Value in motion.' } as const;
+export const BRAND = { name: 'Solana Gold', ticker: 'GOLD', tagline: 'Value in motion.', mintAddress: 'kpD9MSKBDSNFqvsEAVkQH1PhKGwVYGD5Coo7YFggoLd', githubUrl: 'https://github.com/solanagoldorg/solana-gold' } as const;
 export const TEST_LAMPORTS = 1_000_000_000;
 export const TOKEN_SUPPLY = 1_000_000_000_000n;
 export const LIMITS = {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { BRAND } from '@solana-gold/config';
 import Playground from './Playground';
 import { Gallery, Explorer, Network } from './Pages';
 import Home from './Home';
@@ -13,6 +14,11 @@ export default function App() {
   const [walletOpen, setWalletOpen] = useState(directWallet);
   const [walletVisited, setWalletVisited] = useState(directWallet);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [copyStatus, setCopyStatus] = useState('Copy');
+  const copyMint = async () => {
+    try { await navigator.clipboard.writeText(BRAND.mintAddress); setCopyStatus('Copied'); }
+    catch { setCopyStatus('Select to copy'); }
+  };
   const network = useNetwork();
   const openWallet = () => { setWalletVisited(true); setWalletOpen(true); setMenuOpen(false); };
   useEffect(() => {
@@ -39,6 +45,10 @@ export default function App() {
       <nav id="main-navigation" className={menuOpen ? 'gold-navigation open' : 'gold-navigation'} aria-label="Main navigation">{routes.map(([href, label]) => <a key={href} href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
       <button className="gold-wallet-button" aria-label="Open wallet" onClick={openWallet} aria-expanded={walletOpen} aria-controls="gold-wallet-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4ZM4 8V4h13v4M15 12h5v4h-5Z"/></svg><span>Wallet</span></button>
     </header>
+    <section className="gold-identity-strip" aria-label="Project links and mint address">
+      <div className="gold-mint-address"><span>Mint address</span><code>{BRAND.mintAddress}</code><button type="button" onClick={() => { void copyMint(); }} aria-label="Copy mint address"><span aria-live="polite">{copyStatus}</span></button></div>
+      <a className="gold-source-link" href={BRAND.githubUrl} target="_blank" rel="noopener noreferrer">GitHub <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a>
+    </section>
     <main id="main-content" className={playground ? "gold-main gold-main-lab" : "gold-main"}>
       <div hidden={!playground}><Playground canMutate={network.canMutate}/></div>
       {path === '/' ? <Home/> : path.startsWith('/collectors') ? <Collectors path={path}/> : path === '/gallery' ? <Gallery/> : path.startsWith('/explorer') ? <Explorer path={path}/> : path === '/network' ? <Network facts={network.facts} status={network.status}/> : path === '/token' ? <Token/> : path === '/about' ? <About/> : path === '/developers' || path === '/builders' ? <Developers/> : path === '/roadmap' ? <Roadmap/> : path === '/whitepaper' ? <Overview/> : !playground ? <section className="page-section"><h1>Page not found.</h1><a href="/">Return home</a></section> : null}

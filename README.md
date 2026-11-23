@@ -6,6 +6,12 @@
 
 Solana Gold is an independent SVM L1 blockchain for transfers, tokens and on-chain applications. Includes Gold Lab, a browser wallet, an asset view, explorer, API and developer tools.
 
+**Mint / CA (reserved)**
+
+```text
+kpD9MSKBDSNFqvsEAVkQH1PhKGwVYGD5Coo7YFggoLd
+```
+
 [Solana cookbook: interact with tokens](https://solana.com/developers/cookbook/games/interact-with-tokens?utm_source=chatgpt.com#:~:text=GOLDSOL)
 
 ## Built with ambition
