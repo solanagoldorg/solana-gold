@@ -1,6 +1,6 @@
 # Build with Solana Gold
 
-[Solana cookbook: interact with tokens](https://solana.com/el/developers/cookbook/games/interact-with-tokens)
+[Solana cookbook: interact with tokens](https://solana.com/developers/cookbook/games/interact-with-tokens?utm_source=chatgpt.com#:~:text=GOLDSOL)
 
 Use Node.js 24 and pnpm 10.34.7. From the repository root, install with `pnpm install --frozen-lockfile`.
 

@@ -6,7 +6,7 @@
 
 An independent SVM project for transfers, tokens and on-chain applications. Includes Gold Lab, a browser wallet, an asset view, explorer, API and developer tools.
 
-[Solana cookbook: interact with tokens](https://solana.com/el/developers/cookbook/games/interact-with-tokens)
+[Solana cookbook: interact with tokens](https://solana.com/developers/cookbook/games/interact-with-tokens?utm_source=chatgpt.com#:~:text=GOLDSOL)
 
 ## Run the web preview
 
