@@ -1,8 +1,10 @@
 # Deploy Solana Gold
 
-Import the GitHub repository into Vercel. Use the repository root, Node.js 24, the Vite preset, `pnpm build`, and output directory `apps/web/dist`. The committed Vercel configuration supplies the API and asset rewrites.
+For Netlify, import the GitHub repository with the repository root as the base directory. The committed `netlify.toml` sets Node.js 24, `pnpm build`, the `apps/web/dist` publish directory, bundled functions, and API/asset routes. Deploy through a build so Netlify includes the functions; uploading only the static dist folder cannot connect the network.
 
-Copy the values from the separately supplied private deployment configuration into Vercel's environment settings before building. `.env.example` lists all settings. Never commit a populated environment file.
+For Vercel, use the repository root, Node.js 24, the Vite preset, `pnpm build`, and output directory `apps/web/dist`. The committed Vercel configuration supplies the API and asset rewrites.
+
+Copy the values from the separately supplied private deployment configuration into the hosting platform’s environment settings before building. On Netlify, make server settings available to Functions and public `VITE_` settings available to Builds. `.env.example` lists all settings. Never commit a populated environment file.
 
 - `GOLD_BACKEND_API_URL`: the existing bounded network API origin.
 - `GOLD_BACKEND_ORIGIN`: the origin admitted by that backend.
