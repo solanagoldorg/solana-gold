@@ -43,12 +43,12 @@ export default function App() {
       <a href="/" className="brand"><img src="/solana-gold-mark.png" alt="" width="44" height="44"/><span className="brand-wordmark">Solana Gold</span></a>
       <button className="gold-menu" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>Menu</button>
       <nav id="main-navigation" className={menuOpen ? 'gold-navigation open' : 'gold-navigation'} aria-label="Main navigation">{routes.map(([href, label]) => <a key={href} href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
-      <button className="gold-wallet-button" aria-label="Open wallet" onClick={openWallet} aria-expanded={walletOpen} aria-controls="gold-wallet-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4ZM4 8V4h13v4M15 12h5v4h-5Z"/></svg><span>Wallet</span></button>
+      <div className="gold-header-actions">
+        <button className="gold-mint-chip" type="button" title={BRAND.mintAddress} aria-label={`Copy mint address ${BRAND.mintAddress}`} onClick={() => { void copyMint(); }}><span aria-live="polite">{copyStatus === 'Copied' ? 'Copied' : 'CA'}</span><code>{BRAND.mintAddress.slice(0, 4)}…{BRAND.mintAddress.slice(-4)}</code><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7 7h9v10H7ZM4 13H3V3h9v1"/></svg></button>
+        <a className="gold-source-link" href={BRAND.githubUrl} target="_blank" rel="noopener noreferrer">GitHub<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a>
+        <button className="gold-wallet-button" aria-label="Open wallet" onClick={openWallet} aria-expanded={walletOpen} aria-controls="gold-wallet-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4ZM4 8V4h13v4M15 12h5v4h-5Z"/></svg><span>Wallet</span></button>
+      </div>
     </header>
-    <section className="gold-identity-strip" aria-label="Project links and mint address">
-      <div className="gold-mint-address"><span>Mint address</span><code>{BRAND.mintAddress}</code><button type="button" onClick={() => { void copyMint(); }} aria-label="Copy mint address"><span aria-live="polite">{copyStatus}</span></button></div>
-      <a className="gold-source-link" href={BRAND.githubUrl} target="_blank" rel="noopener noreferrer">GitHub <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M5 15 15 5M5 5h10v10"/></svg></a>
-    </section>
     <main id="main-content" className={playground ? "gold-main gold-main-lab" : "gold-main"}>
       <div hidden={!playground}><Playground canMutate={network.canMutate}/></div>
       {path === '/' ? <Home/> : path.startsWith('/collectors') ? <Collectors path={path}/> : path === '/gallery' ? <Gallery/> : path.startsWith('/explorer') ? <Explorer path={path}/> : path === '/network' ? <Network facts={network.facts} status={network.status}/> : path === '/token' ? <Token/> : path === '/about' ? <About/> : path === '/developers' || path === '/builders' ? <Developers/> : path === '/roadmap' ? <Roadmap/> : path === '/whitepaper' ? <Overview/> : !playground ? <section className="page-section"><h1>Page not found.</h1><a href="/">Return home</a></section> : null}
