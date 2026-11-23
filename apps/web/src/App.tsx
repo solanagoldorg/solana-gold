@@ -34,7 +34,7 @@ export default function App() {
   return <div className="site-shell">
     <a className="skip-link" href="#main-content">Skip to content</a>
     <header className="site-header gold-header">
-      <a href="/" className="brand"><img src="/solana-gold-mark.png" alt="" width="44" height="44"/><span className="brand-wordmark"><span>Solana</span><strong>Gold</strong></span></a>
+      <a href="/" className="brand"><img src="/solana-gold-mark.png" alt="" width="44" height="44"/><span className="brand-wordmark">Solana Gold</span></a>
       <button className="gold-menu" type="button" aria-expanded={menuOpen} aria-controls="main-navigation" onClick={() => setMenuOpen(!menuOpen)}>Menu</button>
       <nav id="main-navigation" className={menuOpen ? 'gold-navigation open' : 'gold-navigation'} aria-label="Main navigation">{routes.map(([href, label]) => <a key={href} href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</nav>
       <button className="gold-wallet-button" aria-label="Open wallet" onClick={openWallet} aria-expanded={walletOpen} aria-controls="gold-wallet-dialog"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v12H4ZM4 8V4h13v4M15 12h5v4h-5Z"/></svg><span>Wallet</span></button>

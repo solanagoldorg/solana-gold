@@ -7,6 +7,11 @@ import { assetInputSchema, PRESETS, type AssetDocument, type ActionProgress, typ
 import { API_BASE, EXPECTED_GENESIS, api, parseUnits, shortAddress } from './api';
 import { PresetPicker, PresetArt, Notice, Address } from './components';
 
+function readLabMode(): 'send' | 'issue' | 'inspect' {
+  const mode = new URLSearchParams(window.location.search).get('mode');
+  return mode === 'send' || mode === 'inspect' ? mode : 'issue';
+}
+
 export default function Playground({ canMutate }: { canMutate: boolean }) {
   const [customImage, setCustomImage] = useState<string | null>(null);
   const [uploadBusy, setUploadBusy] = useState(false);
@@ -17,9 +22,9 @@ export default function Playground({ canMutate }: { canMutate: boolean }) {
   const [busy, setBusy] = useState(false); const [progress, setProgress] = useState<ActionProgress | null>(null); const [error, setError] = useState('');
   const [activity, setActivity] = useState<{ label: string; signature: string; mint?: string }[]>([]); const [recipient, setRecipient] = useState(''); const [amount, setAmount] = useState('0.01');
   const [completed, setCompleted] = useState<AssetDocument | null>(null);
-  const [mode, setMode] = useState<'send'|'issue'|'inspect'>(() => new URLSearchParams(window.location.search).get('mode') === 'issue' ? 'issue' : 'send');
+  const [mode, setMode] = useState<'send'|'issue'|'inspect'>(readLabMode);
   const [review, setReview] = useState(false);
-  useEffect(() => { const read = () => { const next=new URLSearchParams(window.location.search).get('mode'); if(next === 'issue')setMode('issue'); }; window.addEventListener('popstate',read); window.addEventListener('gold-route',read); return () => { window.removeEventListener('popstate',read); window.removeEventListener('gold-route',read); }; }, []);
+  useEffect(() => { const read = () => { setMode(readLabMode()); setReview(false); }; window.addEventListener('popstate',read); window.addEventListener('gold-route',read); return () => { window.removeEventListener('popstate',read); window.removeEventListener('gold-route',read); }; }, []);
   const record = (label: string, signature: string, mint?: string) => setActivity(previous => [{ label, signature, mint }, ...previous].slice(0, 12));
   const refreshBalance = async () => { if (connection.current && wallet.current && canMutate) setBalance(await connection.current.getBalance(wallet.current.publicKey, 'confirmed')); };
   async function run(operation: () => Promise<void>, requiresNetwork = true) {
@@ -72,8 +77,8 @@ export default function Playground({ canMutate }: { canMutate: boolean }) {
   }
   const locked = !!issuance.current;
   return <section className="gold-lab">
-    <header className="lab-heading"><div><p className="lab-title">Gold Lab</p><h1>Your next move.</h1></div><p>Transfers, token issuance<br/>and the receipts behind them.</p></header>
-    <div className="lab-tabs" role="tablist" aria-label="Gold Lab actions">{([['send','Transfer'],['issue','Create a token'],['inspect','Activity']] as const).map(([id,label]) => <button key={id} role="tab" aria-selected={mode===id} onClick={() => { setMode(id); setReview(false); }}>{label}</button>)}<span className="lab-tab-track" data-position={mode}/></div>
+    <header className="lab-heading"><div><p className="lab-title">Gold Lab</p><h1>Your next move.</h1></div><p>Transfers, token issuance <br/>and the receipts behind them.</p></header>
+    <div className="lab-tabs" role="tablist" aria-label="Gold Lab actions">{([['issue','Create a token'],['send','Transfer'],['inspect','Activity']] as const).map(([id,label]) => <button key={id} role="tab" aria-selected={mode===id} onClick={() => { setMode(id); setReview(false); }}>{label}</button>)}<span className="lab-tab-track" data-position={mode}/></div>
     <div className="lab-layout">
       <div className="lab-workspace">
         {mode === 'send' ? <div className="lab-transfer" key="send"><div className="lab-panel-heading"><h2>Send Gold.</h2><p>A clear view of where it goes.</p></div><div className="transfer-medallion" aria-hidden="true"><img src="/solana-gold-mark.png" alt=""/><div className="transfer-orbit"/></div><form onSubmit={event => { event.preventDefault(); setError(''); try { parseUnits(amount,9); if(!/^[1-9A-HJ-NP-Za-km-z]{32,44}$/.test(recipient))throw new Error('Enter a valid recipient address.'); setReview(true); } catch(cause) { setError(cause instanceof Error?cause.message:'Check the transfer details.'); } }}><label>Recipient<input value={recipient} onChange={e => { setRecipient(e.target.value); setReview(false); }} autoComplete="off" placeholder="Wallet address"/></label><label className="lab-amount-field">Amount<div className="lab-amount"><input value={amount} onChange={e => { setAmount(e.target.value); setReview(false); }} inputMode="decimal" aria-label="Transfer amount"/><span>tGOLD</span></div></label><button className="button primary" disabled={busy || !publicKey}>Review transfer</button></form>{review ? <div className="lab-review" role="region" aria-label="Transfer review"><h3>Review your transfer</h3><dl><dt>Recipient</dt><dd><Address value={recipient}/></dd><dt>Amount</dt><dd>{amount} tGOLD</dd></dl><p>The final network fee is checked before signing.</p><button className="button primary" disabled={busy || !canMutate} onClick={() => { void transfer(false); setReview(false); }}>Confirm transfer</button></div> : null}</div> : null}
