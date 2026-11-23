@@ -2,11 +2,17 @@
 
 [Source repository](https://github.com/solanagoldorg/solana-gold)
 
-<img src="apps/web/public/solana-gold-logo.png" alt="Solana Gold coin" width="220"/>
+<img src="apps/web/public/solana-gold-mark.png" alt="Solana Gold mark" width="220"/>
 
-An independent SVM project for transfers, tokens and on-chain applications. Includes Gold Lab, a browser wallet, an asset view, explorer, API and developer tools.
+Solana Gold is an independent SVM L1 blockchain for transfers, tokens and on-chain applications. Includes Gold Lab, a browser wallet, an asset view, explorer, API and developer tools.
 
 [Solana cookbook: interact with tokens](https://solana.com/developers/cookbook/games/interact-with-tokens?utm_source=chatgpt.com#:~:text=GOLDSOL)
+
+## Built with ambition
+
+**On November 26, 2017, Bitcoin Gold was #5 at $6.1B in market capitalization.** [CoinMarketCap historical snapshot](https://coinmarketcap.com/historical/20171126/).
+
+That scale is an inspiration for Solana Gold’s ambition.
 
 ## Run the web preview
 

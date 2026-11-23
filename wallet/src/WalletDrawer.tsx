@@ -30,7 +30,7 @@ export default function WalletDrawer({ open, onClose }: { open: boolean; onClose
   }, [open]);
   return createPortal(<div className="wallet-drawer-overlay" hidden={!open} onClick={event=>{if(event.target===event.currentTarget)closeAction.current();}}>
     <aside className="wallet-drawer" ref={panel} id="gold-wallet-dialog" role="dialog" aria-modal="true" aria-labelledby="gold-wallet-heading">
-      <header className="wallet-drawer-top"><div><img src="/solana-gold-logo.png" alt="" width="26" height="26"/><h2 id="gold-wallet-heading">Gold Wallet</h2></div><button ref={close} type="button" aria-label="Close wallet panel" onClick={()=>closeAction.current()}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
+      <header className="wallet-drawer-top"><div><img src="/solana-gold-mark.png" alt="" width="26" height="26"/><h2 id="gold-wallet-heading">Gold Wallet</h2></div><button ref={close} type="button" aria-label="Close wallet panel" onClick={()=>closeAction.current()}><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button></header>
       <div className="wallet-drawer-content"><Suspense fallback={<p className="wallet-drawer-loading" role="status">Opening wallet…</p>}><Wallet gateway={gateway} presentation="drawer"/></Suspense></div>
     </aside>
   </div>, document.body);
