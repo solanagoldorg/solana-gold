@@ -1,0 +1,19 @@
+{
+  "name": "Solana Gold development network",
+  "apiBase": "",
+  "rpcUrl": "",
+  "expectedGenesisHash": "",
+  "explorer": "",
+  "displaySymbol": "tGOLD",
+  "nativeDecimals": 9,
+  "hasMonetaryValue": false,
+  "operatorCount": 1,
+  "agaveVersion": "3.0.14",
+  "tokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+  "associatedTokenProgram": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+  "mainnet": {
+    "available": false,
+    "launchDate": null,
+    "parameters": null
+  }
+}

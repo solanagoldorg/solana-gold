@@ -1,0 +1,33 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "installCommand": "pnpm install --frozen-lockfile",
+  "buildCommand": "pnpm build",
+  "outputDirectory": "apps/web/dist",
+  "rewrites": [
+    {
+      "source": "/_network/:path*",
+      "destination": "/api/gateway?path=:path*"
+    },
+    {
+      "source": "/chain-assets/:path*",
+      "destination": "/api/assets?store=network&path=:path*"
+    },
+    {
+      "source": "/uploaded-assets/:path*",
+      "destination": "/api/assets?store=image&path=:path*"
+    },
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ],
+  "functions": {
+    "api/gateway.js": {
+      "maxDuration": 20
+    },
+    "api/assets.js": {
+      "maxDuration": 20
+    }
+  }
+}

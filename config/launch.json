@@ -1,0 +1,35 @@
+{
+  "name": "Solana Gold",
+  "ticker": "GOLD",
+  "status": "not_launched",
+  "initialAsset": {
+    "network": "Solana mainnet",
+    "venue": null,
+    "mintAddress": null,
+    "venueUrl": null,
+    "developerHoldings": {
+      "amount": null,
+      "acquisitionMethod": null,
+      "vestingPolicy": null
+    }
+  },
+  "nativeAsset": {
+    "network": "Solana Gold mainnet",
+    "status": "planned_not_launched",
+    "genesisHash": null,
+    "supplyPolicy": null,
+    "bridgeReservePolicy": null
+  },
+  "bridge": {
+    "status": "proposed_not_implemented",
+    "model": null,
+    "conversionRatio": null,
+    "securityModel": null
+  },
+  "liquidityPool": {
+    "initialVenue": null,
+    "futureVenue": null,
+    "fundingCommitment": null
+  },
+  "hasTestnetConversionEntitlement": false
+}
