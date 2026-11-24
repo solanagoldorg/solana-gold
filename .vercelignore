@@ -14,3 +14,8 @@ tests/
 infra/
 playwright-report/
 test-results/
+netlify/
+api/*.test.mjs
+**/dist/
+**/*.log
+.openai/

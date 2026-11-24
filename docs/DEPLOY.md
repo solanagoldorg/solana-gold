@@ -1,5 +1,7 @@
 # Deploy Solana Gold
 
+The production website is [solanagold.org](https://solanagold.org), hosted on Vercel with the same-origin network and asset gateways enabled. The `www` hostname redirects to the apex domain.
+
 For Netlify, import the GitHub repository with the repository root as the base directory. The committed `netlify.toml` sets Node.js 24, `pnpm build`, the `apps/web/dist` publish directory, bundled functions, and API/asset routes. Deploy through a build so Netlify includes the functions; uploading only the static dist folder cannot connect the network.
 
 For Vercel, use the repository root, Node.js 24, the Vite preset, `pnpm build`, and output directory `apps/web/dist`. The committed Vercel configuration supplies the API and asset rewrites.
